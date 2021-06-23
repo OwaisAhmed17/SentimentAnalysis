@@ -1,0 +1,313 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Awesome Responsive Template | Template Stock</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+
+	<!-- Goggle Font -->
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+
+	<!-- Font Css -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+
+	<!-- Custom CSS -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+	<!-- Animation Css -->
+	<link rel="stylesheet" href="{% static 'css/animate.css' %}">
+
+
+</head>
+<body>
+<!-- Header -->
+<div class="header-div">
+
+<nav class="navbar navbar-default">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header logo-div bounceInLeft wow" data-wow-duration="2s">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"></a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse top-right-menu-ul bounceInRight wow" id="bs-example-navbar-collapse-1" data-wow-duration="4s">
+      <ul class="nav navbar-nav navbar-right">
+
+      </ul>
+    </div><!-- End navbar-collapse -->
+  </div><!-- End container -->
+</nav>
+
+<div class="container wow bounceInDown" data-wow-duration="5s">
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8 text-center slide-text">
+			<h1>Tweet Based Depression Analysis</h1>
+			<p>We analyse the tweets of the user whose handle you provide to determine whether they show signs of being depressed, we strive to keep improving and right now ater training and testing we have arrived at 93% accuracy, use the insights gathered here as a guiding point and not a diagnosis. This will help paint a broad picture of your specified user. Hope this tool helps you!</p>
+		</div><!-- End col-md-8-->
+		<div class="col-md-offset-2"></div><!-- End col-md-offset-2 -->
+	</div><!-- End Row -->
+</div><!-- End Contanier -->
+
+</div><!-- End header-div -->
+
+<!-- Feature -->
+
+<div class="container" id="features">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="main_heading">
+				<h1>Parameters</h1>
+				<div  class="text-center"><span class="underline"></span></div>
+			</div>
+		</div><!-- End col-md-12 -->
+	</div><!-- End row -->
+
+	<div class="row">
+		<div class="col-md-3 col-sm-6">
+
+		</div><!-- End col-md-3-->
+		<div class="col-md-3 col-sm-6">
+			<div class="features-div">
+			   <i class="fa fa-code"></i>
+			   <h4>Subjectivity</h4>
+			   <p>Subjective sentences generally refer to personal opinion, emotion or judgment whereas objective refers to factual information. </p>
+			</div>
+		</div><!-- End col-md-3-->
+		<div class="col-md-3 col-sm-6">
+			<div class="features-div">
+			   <i class="fa fa-life-ring"></i>
+			   <h4>Polarity</h4>
+			   <p>Polarity is float which lies in the range of [-1,1] where 1 means positive statement and -1 means a negative statement.</p>
+			</div>
+		</div><!-- End col-md-3-->
+		<div class="col-md-3 col-sm-6">
+
+		</div><!-- End col-md-3-->
+	</div><!-- End row -->
+</div><!-- End Container -->
+
+
+<!-- End Feature -->
+
+
+<!-- Services -->
+
+<div class="container" id="Services">
+	<div class="row">
+
+
+	</div><!-- End col-md-4-->
+
+
+</div><!-- End container -->
+
+<!-- End Services -->
+<!-- About -->
+<div class="container" id="About">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="main_heading">
+				<h1>Run Model</h1>
+				<div  class="text-center"><span class="underline"></span></div>
+			</div>
+		</div><!-- End col-md-12 -->
+	</div><!-- End row -->
+
+
+	<div class="row"><center>
+
+        <form action="/external/" method="post">
+            {% csrf_token %}
+            Input Text:
+            <input type="text" name="param" required><br><br>
+            {{data_external}}<br><br>
+            Number of Tweets:
+            <input type="number" name="num" min="1" required><br><br>
+            <input type="submit" value="Execute External Python Script" ><br><br>
+            {% if exist %}
+                <h3>Please enter a Twitter Handle that exists.</h3>
+            {% endif %} 
+            <div style="text-align: justify; width: 30%;">
+            {% if pos %} 
+            <h2>Tweet Analysis</h2>
+                <p><b>Number of Positive Tweets</b> : {{pos|safe}}</p>
+            {% endif %}
+            {% if neg %} 
+                <p><b>Number of Negative Tweets</b> : {{neg|safe}}</p>
+            {% endif %} 
+            {% if avg_sub %} 
+                <p><b>Average Subjectivity of Tweets</b> : {{avg_sub|safe}}</p>
+            {% endif %}
+            {% if avg_pol %} 
+                <p><b>Average Polarity of Tweets</b> : {{avg_pol|safe}}</p>
+            {% endif %}
+            </div>
+            <br><br>
+            {% if chart %}
+                <img src="data:image/png;base64, {{chart|safe}}">
+            {% endif %} 
+            {% if word %} 
+                <img src="data:image/png;base64, {{word|safe}}"> 
+            {% endif %}
+
+            {% if pers %} 
+                  <h2>Personality Analysis</h2>
+            {% endif %} 
+            {% if i0000 %} 
+                  <img src="/static/istp-virtuoso.png" alt="Something">
+            {% endif %}
+            {% if i0001 %} 
+                  <img src="/static/istj-logistician.png" alt="Something">
+            {% endif %}
+            {% if i0010 %} 
+                  <img src="/static/isfp-adventurer.png" alt="Something">
+            {% endif %}
+            {% if i0011 %} 
+                  <img src="/static/isfj-defender.png" alt="Something">
+            {% endif %}
+            {% if i0100 %} 
+                  <img src="/static/intp-logician.png" alt="Something">
+            {% endif %}
+            {% if i0101 %} 
+                  <img src="/static/intj-architect.png" alt="Something">
+            {% endif %}
+            {% if i0110 %} 
+                  <img src="/static/infp-mediator.png" alt="Something">
+            {% endif %}
+            {% if i0111 %} 
+                  <img src="/static/infj-advocate.png" alt="Something">
+            {% endif %}
+            {% if i1000 %} 
+                  <img src="/static/estp-entrepreneur.png" alt="Something">
+            {% endif %}
+            {% if i1001 %} 
+                  <img src="/static/estj-executive.png" alt="Something">
+            {% endif %}
+            {% if i1010 %} 
+                  <img src="/static/esfp-entertainer.png" alt="Something">
+            {% endif %}
+            {% if i1011 %} 
+                  <img src="/static/esfj-consul.png" alt="Something">
+            {% endif %}
+            {% if i1100 %} 
+                  <img src="/static/entp-debater.png" alt="Something">
+            {% endif %}
+            {% if i1101 %} 
+                  <img src="/static/entj-commander.png" alt="Something">
+            {% endif %}
+            {% if i1110 %} 
+                  <img src="/static/enfp-campaigner.png" alt="Something">
+            {% endif %}
+            {% if i1111 %} 
+                  <img src="/static/enfj-protagonist.png" alt="Something">
+            {% endif %}
+            <div style="text-align: justify;width: 40%;">
+            {% if pers %}
+                <h3>Personality</h3>
+                <p>{{pers|safe}}</p>
+            {% endif %}
+            {% if cog %}
+                <h3>Cognitive</h3>
+                <p>{{cog|safe}}</p>
+            {% endif %}
+            {% if dom %}
+                <h3>Dominant</h3>
+                <p>{{dom|safe}}</p>
+            {% endif %}
+            {% if aux %}
+                <h3>Auxiliary</h3>
+                <p>{{aux|safe}}</p>
+            {% endif %}
+            {% if ter %}
+                <h3>Tertiary</h3>
+                <p>{{ter|safe}}</p>
+            {% endif %}
+            {% if inf %}
+                <h3>Inferior</h3>
+                <p>{{inf|safe}}</p>
+            {% endif %}
+            {% if car %}
+                <h3>Career</h3>
+                <p>{{car|safe}}</p>
+            {% endif %}
+            {% if int %}
+                <h3>Interaction</h3>
+                <p>{{int|safe}}</p>
+            {% endif %}
+            {% if fri %}
+                <h4>Friends</h4>
+                <p>{{fri|safe}}</p>
+            {% endif %}
+            {% if par %}
+                <h4>Parents</h4>
+                <p>{{par|safe}}</p>
+            {% endif %}
+            {% if rel %}
+                <h4>Relationships</h4>
+                <p>{{rel|safe}}</p>
+            {% endif %}
+            </div>
+            <br><br>
+            
+            </form>
+            <div  class="text-center"><span class="underline"></span></div>
+        </center>
+        </div><!-- End container -->
+        <!-- End About -->
+        
+        <!-- Call to Action -->
+        <div class="call-action-bg" id="Call-to-Action">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="main_heading">
+                            <h1>Why we do what we do</h1>
+                            <div  class="text-center"><span class="underline"></span></div>
+                        </div>
+                    </div><!-- End col-md-12 -->
+                </div><!-- End row -->
+        
+                <div class="col-md-12">
+                    <p>Clinical depression has surged to epidemic proportions in recent decades, from little-mentioned misery at the margins of society to a phenomenon that is rarely far from the news. It is widespread in classrooms and boardrooms, refugee camps and inner cities, farms and suburbs.Depression is the leading global disability, and unipolar (as opposed to bipolar) depression is the 10th leading cause of early death, it calculates. The link between suicide, the second leading cause of death for young people aged 15-29, and depression is clear, and around the world two people kill themselves every minute.</p>
+                </div><!-- End col-md-12-->
+        
+            </div><!-- End container -->
+        </div>
+        
+        <!-- End Call to Action -->
+        
+        <!-- Price Table -->
+        
+        
+        
+        
+        
+        
+        <!-- Testimonial -->
+        
+        
+        <!-- End Testimonial -->
+        
+        <!-- Footer -->
+        
+        <!-- End Footer -->
+        
+        
+        <script type="text/javascript" src="{% static 'js/jquery-main.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/wow.min.js' %}"></script>
+        
+        <script>
+            new WOW().init();
+        </script>
+        
+        </body>
+      </html>
